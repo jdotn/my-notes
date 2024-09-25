@@ -1,4 +1,4 @@
-###Amazon LinuxのPHP 7.4 -> 8.2実施手順
+### Amazon LinuxのPHP 7.4 -> 8.2実施手順
 
 2024年9月26日(木)11:00のアップデート業務手順.
 
@@ -112,4 +112,4 @@ $ sudo systemctl start php-fpm.service
 
 問題なくphp8.2, phpライブラリがインストールできた場合はgeonavi2-web-dev2も同様の手順でphp8.2にする。
 
-【AWS】EC2のphpをアップデートする（amazon-linux-extrasコマンド）: [https://namileriblog.com/aws/amazon-linux-extras/#i-10](https://namileriblog.com/aws/amazon-linux-extras/#i-10) 
+EC2のphpをアップデートする（amazon-linux-extrasコマンド）: [https://namileriblog.com/aws/amazon-linux-extras/#i-10](https://namileriblog.com/aws/amazon-linux-extras/#i-10) 
