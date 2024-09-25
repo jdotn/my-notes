@@ -6,83 +6,85 @@
 PHPのバージョンが7.4であることを確認。
 
 ```bash
-$ php -v
+php -v
 ```
 
 パッケージのアップデート
 
 ```bash
-$ sudo yum update -y
+sudo yum update -y
 ```
 
 php7.4の無効化
 
 ```bash
-$ sudo amazon-linux-extras disable php7.4
+sudo amazon-linux-extras disable php7.4
 ```
 
 サーバーソフトウェアの停止
 
 ```bash
-$ sudo systemctl stop httpd.service
-$ sudo systemctl stop php-fpm.service
+sudo systemctl stop httpd.service
+```
+```bash
+sudo systemctl stop php-fpm.service
 ```
 
 すべてのPHPライブラリの削除
 
-```
-$ sudo yum -y remove php-cli php-common php-fpm php-json php-mbstring php-mysqlnd php-opcache php-pdo php-pecl-igbinary php-pecl-redis php-pgsql php-xml
+```bash
+sudo yum -y remove php-cli php-common php-fpm php-json php-mbstring php-mysqlnd php-opcache php-pdo php-pecl-igbinary php-pecl-redis php-pgsql php-xml
 ```
 
 PHPライブラリがすべて削除されたか確認
 
 ```bash
-$ sudo yum list installed | grep php
+sudo yum list installed | grep php
 ```
 
 php8.2の有効化(phpのインストールではない)
 
 ```bash
-$ sudo amazon-linux-extras enable php8.2
+sudo amazon-linux-extras enable php8.2
 ```
 
 パッケージに関するメタデータの削除。※Amazon Linuxから実行するよう指示が出る。
 
 ```bash
-$ sudo yum clean metadata
+sudo yum clean metadata
 ```
 
 PHPライブラリのインストール
 
 ```bash
-$ sudo yum install php-cli php-common php-fpm php-json php-mbstring php-opcache php-pgsql php-xml
+sudo yum install php-cli php-common php-fpm php-json php-mbstring php-opcache php-pgsql php-xml
 ```
 
 PHPのバージョンが8.2になっていることを確認
 
 ```bash
-$ php -v
+php -v
 ```
 
 php-pearのインストールによりpeclコマンドが使える(一緒にphp-processというのもインストールされる)
 
 ```bash
-$ sudo yum install php-pear
+sudo yum install php-pear
 ```
 peclでredisをインストールするときにphp-develが求められるのでインストール.
 
 ```bash
-$ sudo yum install php-devel
+sudo yum install php-devel
 ```
 redisのインストール※gccが入っていない場合はyum install gcc
 
 ```bash
-$ sudo pecl install redis
+sudo pecl install redis
 ```
 igbinaryのインストール
 
 ```bash
-$ sudo pecl install igbinary
+sudo pecl install igbinary
 ```
  igbinaryの有効化 ※/etc/php.d/40-igbinary.iniを作成し、下記を記載
 
@@ -98,14 +100,18 @@ extension=redis.so
 必要となるPHPがすべてインストールされており、有効になっているか確認
 
 ```bash
-$ yum list installed | grep php
-$ php -m
+yum list installed | grep php
+```
+```
+php -m
 ```
 ソースのデプロイ完了後、Webサーバーソフトウェアの起動
 
 ```bash
-$ sudo systemctl start httpd.service
-$ sudo systemctl start php-fpm.service
+sudo systemctl start httpd.service
+```
+```bash
+sudo systemctl start php-fpm.service
 ```
 #php-fpm...FastCGIプロトコルを介してWebサーバー(apache)と通信しphpの処理を行う
 プロセスマネージャー。

@@ -2,5 +2,5 @@
 
 sshでファイルのやり取り
 ```bash
-$ sftp 
+sftp 
 ```
