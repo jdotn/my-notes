@@ -22,3 +22,9 @@ exportを先頭につける必要がある。
 ## モジュールはimport時に一度だけ評価される
 三回読み込んだとしても評価されるのは最初の一回目のみ。
 
+## CommonJSにおけるexport
+export = dayjs;
+という記述になる.
+これはECMAScriptのdefault exportとは異なるため、
+TypeScriptのコンパイラはデフォルトインポートを行うために特別なフラグ
+（allowSyntheticDefaultImports）を必要とする.
