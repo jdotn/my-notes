@@ -1,0 +1,11 @@
+CDK commands:
+cdk init app --language typescript
+cdk bootstrap
+cdk bootstrap --profile hoge
+cdk synth
+cdk deploy
+cdk deploy --profile hoge
+cdk list
+cdk diff
+cdk doctor
+cdk destroy

@@ -1,0 +1,7 @@
+neovim command:
+:Ex
+:lua 
+:luado
+:h
+:h stdlib
+:checkhealth
