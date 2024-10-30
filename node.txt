@@ -1,0 +1,11 @@
+Node commands:
+
+node -v
+
+npm install
+npm uninstall
+npm ci
+npm root -g
+npm list -g --depth=0
+
+npx 
