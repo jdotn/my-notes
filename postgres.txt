@@ -7,6 +7,7 @@ pg_isready -h [HostName]   check host db server status
 psql commands:
 \? [commands]              show help
 \q                         quit psql
+\c                         choice database
 \dt                        list tables
 \d [Name]                  describe table, view, sequence, or index
 \l                         list databases
