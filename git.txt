@@ -44,3 +44,16 @@ git log --grep="fix"
 git log --merges
 git log --no-merges
 
+git stash options:
+git stash
+git stash show -p
+git diff HEAD..stash@{0}
+git stash pop
+git stash pop stash@{1}
+git stash drop
+git stash drop stash@{0}
+git stash clear
+
+git cherry-pick options:
+git checkout A
+git cherry-pick [branch A's commitID] [branch B's commitID] : branch B's commit to branch A
