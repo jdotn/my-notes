@@ -9,3 +9,14 @@ npm root -g
 npm list -g --depth=0
 
 npx 
+
+NVM commands:
+nvm --help
+nvm current
+nvm install <version>
+nvm uninstall <version>
+nvm ls
+nvm ls-remote
+nvm ls-remote --lts
+nvm use <version>
+nvm alias default <version>

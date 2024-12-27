@@ -5,6 +5,7 @@ tmux : sessionの起動
 tmux new -s 名前: 名前付きsessionを起動
 tmux a: sessionの再開
 tmux a -t 名前: 中断していた名前付きsessionに戻る 
+tmux ls: session一覧の表示
 prefix d: sessionの一時中断(Detach)
 prefix s: sessionの表示
 exit: sessionの終了
@@ -23,7 +24,9 @@ prefix ;: 前のペインに移動
 prefix x: ペインを終了
 prefix {: ペイン順序を前方向に入れ替え
 prefix {: ペイン順序を後方向に入れ替え
+prefix t: ペインに時計を表示
 exit: ペインを終了
 
 ## other
+prefix r: tmux.conf再起動
 prefix ?: キーバインドの一覧を表示

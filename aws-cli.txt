@@ -1,5 +1,6 @@
 aws commands:
 aws configure
+aws configure --profile [任意の名前]: 名前付きでプロファイル作成
 aws configure hoge
 aws configure list-profiles
 aws s3 ls
