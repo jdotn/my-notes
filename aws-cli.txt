@@ -4,3 +4,4 @@ aws configure hoge
 aws configure list-profiles
 aws s3 ls
 aws s3 ls --profile hoge
+aws s3 sync [file or directory?]
