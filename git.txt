@@ -12,6 +12,7 @@ git pull
 git fetch
 git merge
 git diff
+git diff --staged:ステージされた変更と直近コミットの差分
 git status
 git mv
 git show(git show HEADと同じ)
