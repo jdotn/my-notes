@@ -2,12 +2,14 @@ git commands:
 git remote show origin
 git -v : バージョン
 git add .
+git rm
 git commit -m
 git clone
 git branch
 git branch -d
 git push
 git switch
+git restore [file or directory]
 git pull
 git fetch
 git merge
