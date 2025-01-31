@@ -1,8 +1,17 @@
-aws commands:
+aws cli commands:
 aws configure
 aws configure --profile [任意の名前]: 名前付きでプロファイル作成
 aws configure hoge
 aws configure list-profiles
+
+Notion:
+awsコマンドで各リソース操作を行う場合は--profile [個人のprofile名]をつけ忘れないこと
+
+S3:
 aws s3 ls
-aws s3 ls --profile hoge
+aws s3 ls
 aws s3 sync [file or directory?]
+
+CloudWatch:
+aws cloudwatch describe-alarms :存在するアラームを調べる
+aws cloudwatch set-alarm-state --alarm-name "アラーム名" --state-value [ALARMなど状態] --state-reason "任意"
