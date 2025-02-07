@@ -28,3 +28,17 @@ export = dayjs;
 これはECMAScriptのdefault exportとは異なるため、
 TypeScriptのコンパイラはデフォルトインポートを行うために特別なフラグ
 （allowSyntheticDefaultImports）を必要とする.
+
+## export * as myNameSpace from 'hoge';は何?
+再エクスポートと呼ばれる記述。別のモジュールからimportしたものを
+改めて自分自身からエクスポートし直すこと。
+複数のモジュールからエクスポートされたものをまとめたモジュール
+を作るときなどに使用される。
+
+## よく見かけるimport * as は何?
+すべての名前付きエクスポートをまとめてインポートする。
+この方法ではモジュールごとの名前空間となるオブジェクトを宣言する。
+import * as myModule from './my-module.js';ならmy-module.jsで
+定義されている名前付きエクスポートをmyModuleオブジェクトとして
+まとめてインポートする。
+

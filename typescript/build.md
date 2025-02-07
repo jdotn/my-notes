@@ -13,3 +13,27 @@ ES6モジュールおよびCommonJsモジュールの両方に対応している
 JavaScriptで実装されたJavaScriptバンドラ.
 デフォルトではCommonJSを使用しているため、
 ESMを使用する際はBabelなどのトランスコンパイラが必要.
+
+
+## tscとesbuildは違う
+共にTypeScriptをJavaScriptにトランスコンパイルする
+ツールだが、型チェックを行うか否か、バンドルを行うか否か
+といった違いがある。
+
+## バンドラであるesbuildはtsconfig.tsがいらない?
+のかもしれない?
+
+## Angularではesbuildを使用する場合もtsconfigを用いている?
+angular.jsonファイルにtsConfigプロパティが存在し、
+そこにtsconfigへのパスが記載してある。
+
+## 型定義ファイルを出力するならtsc -dを使おう
+esbuildでは型定義ファイルを作成できないため、npmパッケージを
+公開するのであればtscを用いて型定義ファイルを作ろう。
+
+## jsファイルをnodeで実行するとき
+jsファイルをcommonjsとesmのどちらで実行するかをnodeに伝える
+ため、package.jsonに"type":"module"を追加するか、
+index.jsをindex.mjsにする必要がある?
+
+
