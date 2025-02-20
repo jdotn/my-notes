@@ -54,4 +54,49 @@ JavaScriptオブジェクトはJSONメソッドを使用して
 文字列に変換可能.主要なブラウザで使用可能.
 ただし結果はJSON表記になる.
 
-ホイスティング(巻き上げ)
+Q.ホイスティング(巻き上げ)とは何?
+インタープリターがコードの実行前に関数や変数、クラス、インポートの
+宣言をそのスコープの先頭に移動するように見えるプロセスのこと。
+
+Q.importされたファイルはどうなる？
+importされたファイル(モジュール)は評価される。
+例えばimportするモジュールにconsole.log()があれば、
+import時に評価され、表示される。
+
+Q.複数のモジュールから一つのモジュールがimportされている場合は?
+同じモジュールの評価は一度だけ行われる。
+2回評価されることはない。
+
+Q.importは何種類ある?
+4種類。
+名前付きimport    : import { export1, export2 } from "module-name";
+デフォルトのimport: import defaultExport from "module-name";
+名前空間のimport  : import * as name from "module-name";
+副作用のimport    : import "module-name";
+
+名前付き:exportしているモジュールで付けられた名前を使ってimport可能。
+実際にはデフォルトのimportと同様に独自に名前をつけることも可能。
+import { Hoge as Myname } from "hogehoge.js";
+
+デフォルト:デフォルトのexportは名前を明示していないので、任意の名前を
+与えることができる。
+import tekitou from "/modules/my-module.js";
+
+名前空間のimport: 以下のコードは/modules/my-module.jsにあるモジュールが
+exportする全ての値を含んだmyModuleを現在のスコープに追加する。
+import * as myModule from "/modules/my-module.js";
+
+この場合myModuleは名前空間オブジェクトを表す。名前空間オブジェクトはexport
+されている全ての値をプロパティとして保持している。
+import * from "module-name";のようなワイルドカードimportは提供されていない。
+高確率で名前の衝突が起こるためである。
+
+副作用のためだけのモジュールimport:
+副作用のためだけにモジュール全体をimportした場合、何もimportされない。
+モジュールのグローバルなコードが実行されるだけで、値はimportされない。
+import "/modules/my-module.js";
+この種のimportはしばしばポリフィルのために用いられる。
+※ポリフィルはグローバル変数を書き換えるから。
+
+
+

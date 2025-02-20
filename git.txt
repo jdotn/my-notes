@@ -6,13 +6,16 @@ git rm
 git commit -m
 git clone
 git branch
-git branch -d
+git branch -a: リモート追跡ブランチの一覧表示
+git branch -d: 
+git branch -vv: ローカルブランチが追跡しているリモートブランチを確認
 git push
 git switch
 git restore [file or directory]
 git restore --staged [file name]
 git pull
-git fetch
+git fetch: リモートリポジトリの最新の履歴だけ名前のないブランチとして取得.
+FETCH_HEADという名前でチェックアウトすることができる
 git merge
 git diff
 git diff --staged:ステージされた変更と直近コミットの差分
