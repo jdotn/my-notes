@@ -86,8 +86,9 @@ import tekitou from "/modules/my-module.js";
 exportする全ての値を含んだmyModuleを現在のスコープに追加する。
 import * as myModule from "/modules/my-module.js";
 
-この場合myModuleは名前空間オブジェクトを表す。名前空間オブジェクトはexport
-されている全ての値をプロパティとして保持している。
+この場合myModuleは名前空間オブジェクトを表す。
+名前空間オブジェクトといっても実態はただのオブジェクトである。
+名前空間オブジェクトはexportされている全ての値をプロパティとして保持している。
 import * from "module-name";のようなワイルドカードimportは提供されていない。
 高確率で名前の衝突が起こるためである。
 
@@ -98,5 +99,20 @@ import "/modules/my-module.js";
 この種のimportはしばしばポリフィルのために用いられる。
 ※ポリフィルはグローバル変数を書き換えるから。
 
+### そもそも名前空間とは?
+変数名や関数名の衝突を避けるため作られた概念。
+グローバルスコープの汚染防止も兼ねている。
+名前空間は概念であり、その実態はただのオブジェクトである。
+var myApp = {
+  variable1: 'value1',
+  function1: function() {
+    console.log('This is function');
+  }
+}
+
+console.log(myApp.variable1); // 'value1'を出力
+myApp.function(); // 'This is function1'を出力
+上記の場合、myAppという名前空間にvariable1という変数とfunction1という関数を
+定義している。
 
 

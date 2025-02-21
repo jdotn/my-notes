@@ -15,6 +15,7 @@ prefix c: 新規ウィンドウを作成
 prefix n: 次のウィンドウに移動
 prefix p: 前のウィンドウに移動
 prefix w: windowの表示
+prefix &: windowを閉じる
 
 ## pain operation
 prefix %: ペインを左右に分ける
