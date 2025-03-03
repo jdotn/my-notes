@@ -1,3 +1,31 @@
+# vim
+
+## Normal mode
+i
+I 
+a
+A
+o
+O
+x
+v
+ctrl + V
+space + v
+ctrl + o ジャンプ前の位置に戻る
+
+## Insert mode
+
+## Visual mode
+u 小文字へ変換
+U 大文字へ変換
+
+## Command mode
+:w
+:q
+:q!
+:reg レジスタの表示
+:jumps
+
 neovim command:
 :Ex
 :lua 
@@ -5,6 +33,7 @@ neovim command:
 :h
 :h stdlib
 :checkhealth
+
 2025-01-24
 ・大前提として、最初からNeovimで環境を構築するのは難しく
 理解も含めて非常に時間がかかる。
