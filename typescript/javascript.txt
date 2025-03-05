@@ -1,3 +1,51 @@
+JavaScriptの歴史
+1995年、NetScape社が当時流行していたWebブラウザ、Netscape Navigatorに
+搭載したのが始まり。
+その後、Microsoftが便乗してJavaScriptと互換性のあるJScriptなるものを開発。
+これをInternet Explolerに搭載した。
+この両者の争いを俗にブラウザ戦争と呼ぶ。
+そもそもJavaScriptはブラウザで動く言語。
+ボタンを押したらフォームが出る、などを実装するための言語。
+ただ、当時はJavaScriptとJScriptでは仕様が異なっていたため、
+ブラウザごとに仕様の異なるJavaScriptが乱立している状態だった。
+この問題を解決するため、NetScape社がJavaScriptの標準化規格を作るよう
+外部機関に依頼した。これがECMA Internationalという機関である。
+その結果、JavaScriptの標準化仕様として定義された言語がECMAScriptである。
+これ以降、このECMAScriptがJavaScriptの標準規格として採用されることが多く
+なってきた。
+
+JavaScriptの発展
+JavaScriptの使用範囲をブラウザだけでなくサーバーでも使えるようにしよう
+という動きが起こった。しかし、そこには問題があった。
+
+JavaScriptの問題点
+様々な問題があったようだが、一番はmodule機能が欠如していたことだ。
+moduleとは、特定の処理をひとまとまりにしておく機能のこと。
+moduleを使用したいという声が大きくなる中、生まれたのがCommonJSである。
+CommonJSとはJavaScriptのモジュール規格の名前。
+モジュールのインポートをしたいならrequre()関数、
+エクスポートならexportsオブジェクト、またはmodule.exportsを使用するという
+ルールである。
+
+Node.js
+CommonJSという仕様ができたおかげで、サーバーサイドでもJavaScriptが使用できる
+ようになった。そして、このCommonJSのモジュールシステムの仕様に基づいて
+Node.jsが実装されることになる。
+
+ESModule
+CommonJSはサーバーサイド環境向けに設計されており、browserifyやWebpackなどの
+ビルドツールを使用しなければブラウザでCommonJSベースのJavaScriptを動かせない
+状態だった。どちらの環境にも対応したモジュールシステムを提供できる仕様を作ろう
+として生まれたのがESModuleである。
+ECMAScript2015(ES6)で導入された。
+
+トランスコンパイラ
+ES7やES6の構文で書かれたJavaScriptをES5など古い規格に直してくれるツールのこと。
+代表格はbabel。
+babelを取り入れることでブラウザがES7やES6の構文に対応する前から、それらの構文
+で書いたコードをブラウザで動かすことができるようになった。
+
+
 Q.プリミティブ型のデータの内、Boolean、Number、BigInt、String、
 Symbolなどが何故オブジェクトのメソッドを呼び出せる?
 A.それぞれのプリミティブ型に対応するオブジェクトがあり、
@@ -114,5 +162,14 @@ console.log(myApp.variable1); // 'value1'を出力
 myApp.function(); // 'This is function1'を出力
 上記の場合、myAppという名前空間にvariable1という変数とfunction1という関数を
 定義している。
+
+### CommonJSには名前付きexportがない？
+存在しない。すべてがmodule.exportsオブジェクトにまとめられるため
+ESMで名前付きimportを直接使用することはできない。
+module.exports全体がESMではデフォルトエクスポートとして扱われる。
+
+### esModuleInterop: trueは何をしている？
+CommonJSをESModuleとして扱うアプローチをとる。
+この設定があると、開発者は両者の違いを意識せずimportできるようになる。
 
 
