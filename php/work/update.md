@@ -1,4 +1,6 @@
-### Laravel 6 -> 10への移行経験
+# Laravel アップグレード
+
+## Laravel 6 -> 10への移行
 2024年5月~9月にかけて, 業務で使用しているアプリケーションのLaravelアップデートを実施.
 
 bitbucket-pipelines.ymlの修正
@@ -196,3 +198,78 @@ src/laravel/tests/Feature/BuildingAPI/UpdateTest.phpの修正
 
 php8.2で推奨されなくなった記述のため修正。
 PHP8.2の新機能: [https://kinsta.com/jp/blog/php-8-2/#h-13](https://kinsta.com/jp/blog/php-8-2/#h-13)
+
+## Laravel 10 -> 11
+1. まずはcomposer.jsonのrequireプロパティのバリューとなるオブジェクト内にある
+laravel/frameworkを"^11.0.0"に変更。
+
+2. composer updateを実施。
+
+3. php artisan -Vでlaravelのバージョンが11になっているか確認。
+
+4. 確認しようとしたところ、Cannot redeclare static Illuminate\Database\Eloquent\Model::$builder as non static
+App\Models\Organizations::$builder
+という謎のエラーが出てきた。
+
+5. おそらくOrganizationクラスの親クラスであるModelクラス内の$builderがstaticであり、そのサブクラスで非staticとして
+再定義しているためエラーを吐いている。
+
+6. 実際にGitHub上のコードでLaravel10と11で比較したところ、framework/src/illuminate/Database/Eloquent/Model.php内に
+protected static string $builder = Builder::class;
+が追加されており、$builderが確かにstatic(かつstring型)になっていることが確認できる。
+
+7. laravel/app/Models/Organization.phpの28行目。
+protected $builderをprotected static string $builderに修正。
+
+8. laravel/vendor/bin/phpunitでユニットテストを実施したところ、以下のエラーが出力。
+
+1) Tests\Unit\Services\EventServiceTest::testCalcPeriodPassedDateに10dを与えた時の返り値が指定した期間になっていることを確認
+TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int|float, string given, called in /var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php on line 356
+
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:455
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:356
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2903
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2594
+/var/www/html/laravel/app/Services/EventService.php:328
+/var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:134
+
+2) Tests\Unit\Services\EventServiceTest::testCalcPeriodPassedDateに1dを与えた時の返り値が指定した期間になっていることを確認
+TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int|float, string given, called in /var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php on line 356
+
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:455
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:356
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2903
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2594
+/var/www/html/laravel/app/Services/EventService.php:328
+/var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:151
+
+3) Tests\Unit\Services\EventServiceTest::testCalcPeriodPassedDateに12hを与えた時の返り値が指定した期間になっていることを確認
+TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int|float, string given, called in /var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php on line 356
+
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:455
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:356
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2903
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2594
+/var/www/html/laravel/app/Services/EventService.php:331
+/var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:168
+
+4) Tests\Unit\Services\EventServiceTest::testCalcPeriodPassedDateに6hを与えた時の返り値が指定した期間になっていることを確認
+TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int|float, string given, called in /var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php on line 356
+
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:455
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:356
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2903
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2594
+/var/www/html/laravel/app/Services/EventService.php:331
+/var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:185
+
+5) Tests\Unit\Services\EventServiceTest::testCalcPeriodPassedDateに1hを与えた時の返り値が指定した期間になっていることを確認
+TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int|float, string given, called in /var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php on line 356
+
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:455
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Units.php:356
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2903
+/var/www/html/laravel/vendor/nesbot/carbon/src/Carbon/Traits/Date.php:2594
+/var/www/html/laravel/app/Services/EventService.php:331
+/var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:202
+

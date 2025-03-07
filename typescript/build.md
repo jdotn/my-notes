@@ -35,5 +35,7 @@ esbuildでは型定義ファイルを作成できないため、npmパッケー�
 jsファイルをcommonjsとesmのどちらで実行するかをnodeに伝える
 ため、package.jsonに"type":"module"を追加するか、
 index.jsをindex.mjsにする必要がある?
-
+package.jsonに"type": "module"を設定することで、.jsファイルが
+.mjs(ESMのファイル)として認識されるらしい。
+上記の設定をしない場合はファイルの拡張子を.mjsにすればよい。
 
