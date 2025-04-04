@@ -273,3 +273,12 @@ TypeError: Carbon\Carbon::rawAddUnit(): Argument #3 ($value) must be of type int
 /var/www/html/laravel/app/Services/EventService.php:331
 /var/www/html/laravel/tests/Unit/Services/EventServiceTest.php:202
 
+原因はメソッドの引数に新しく使用されているunion型には、 指定された型しか使用できないため。(それ以外の型に自動変換ができない)
+Laravel10ではCarbon.phpのaddDays(), addHours()の引数はint型のみだったが、
+Laravel11からはint|floatのunion型になっている。
+PHP8.0から導入されたunion型(ここではint|float)にそれ以外の方を
+代入しようとするとTypeErrorとなる処理となっている。
+
+Carbon ver2 https://github.com/briannesbitt/Carbon/blob/2.73.0/src/Carbon/Carbon.php
+Carbon ver3 https://github.com/briannesbitt/Carbon/blob/3.8.6/src/Carbon/Carbon.php
+PHP https://www.php.cn/ja/faq/62045.html
